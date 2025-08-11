@@ -1,4 +1,4 @@
-"""mdhbonds: in batch converts fasta files with aminoacid sequences to plain text (lines with no symbols other than aminoacids) 
+"""mdhbonds: in batch converts fasta files with aminoacid sequences to lines with no symbols other than aminoacids 
    Copyright (C) 2024  Yevhen Kustovskiy
    
    This program is free software; you can redistribute it and/or modify
@@ -67,3 +67,4 @@ if __name__ == "__main__":
                 
 
         
+
