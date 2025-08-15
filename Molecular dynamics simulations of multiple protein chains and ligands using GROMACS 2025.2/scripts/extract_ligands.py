@@ -15,7 +15,7 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
    
-   A copy of GNU license, NumPy, RDKit, and MDAnalysis license is available at:
+   Copies of GNU license, NumPy, RDKit, and MDAnalysis license are available at:
    
    https://github.com/YevhenKustovskiy/eugen-s-science-archive/blob/main/LICENSE.txt 
    
@@ -81,6 +81,7 @@ if __name__ == "__main__":
         if args.v:
             print(f"Processing file {file} ...")
         extract(file)
+
 
 
 
