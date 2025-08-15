@@ -1,4 +1,4 @@
-"""addstructure.py: adds merges to coordinate files
+"""add_structure.py: adds merges to coordinate files
    Copyright (C) 2025  Yevhen Kustovskiy
    
    This program is free software; you can redistribute it and/or modify
