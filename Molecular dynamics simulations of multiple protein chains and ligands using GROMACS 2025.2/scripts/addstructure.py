@@ -17,7 +17,7 @@
    
    A copy of GNU license as well as MDAnalysis license is available at:
    
-   https://github.com/YevhenKustovskiy/md-scripts/edit/main/LICENSE   
+   https://github.com/YevhenKustovskiy/eugen-s-science-archive/blob/main/LICENSE.txt 
    
    Contact email: ykustovskiy@gmail.com
    
