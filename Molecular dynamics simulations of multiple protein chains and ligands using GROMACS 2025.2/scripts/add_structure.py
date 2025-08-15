@@ -1,4 +1,4 @@
-"""add_structure.py: adds merges to coordinate files
+"""add_structure.py: merges two coordinate files
    Copyright (C) 2025  Yevhen Kustovskiy
    
    This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@
    
    Requirements: script was succesfully used with 
    Python 3.10, MDAnalysis 2.5.0
+"""
 
 import argparse
 import MDAnalysis as mda
