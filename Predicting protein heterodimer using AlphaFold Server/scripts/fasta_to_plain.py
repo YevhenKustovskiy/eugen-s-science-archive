@@ -1,5 +1,5 @@
-"""mdhbonds: in batch converts fasta files with aminoacid sequences to lines with no symbols other than aminoacids 
-   Copyright (C) 2024  Yevhen Kustovskiy
+"""fasta_to_plain: in batch converts fasta files with aminoacid sequences to lines with no symbols other than aminoacids 
+   Copyright (C) 2025  Yevhen Kustovskiy
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
    
-   A copy of GNU license as well as NumPy and Pandas license is available at:
+   A copy of GNU license is available at:
    
    https://github.com/YevhenKustovskiy/eugen-s-science-archive/edit/main/LICENSE   
    
    Contact email: ykustovskiy@gmail.com
    
    Requirements: Python 3.11
-                                                                          """
+"""
 
 import os
 import argparse
@@ -67,4 +67,5 @@ if __name__ == "__main__":
                 
 
         
+
 
