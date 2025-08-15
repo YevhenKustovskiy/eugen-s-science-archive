@@ -1,3 +1,30 @@
+"""extract_ligands.py: separates ligand coordinates from complex coordinates
+   Copyright (C) 2025  Yevhen Kustovskiy
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
+   
+   A copy of GNU license, NumPy, RDKit, and MDAnalysis license is available at:
+   
+   https://github.com/YevhenKustovskiy/eugen-s-science-archive/blob/main/LICENSE.txt 
+   
+   Contact email: ykustovskiy@gmail.com
+   
+   Requirements: script was succesfully used with 
+   Python 3.10, NumPy 1.24.3, RDKit 2023.9.4, MDAnalysis 2.5.0, 
+"""
+
 import os
 import shutil
 import argparse
@@ -54,6 +81,7 @@ if __name__ == "__main__":
         if args.v:
             print(f"Processing file {file} ...")
         extract(file)
+
 
 
 
