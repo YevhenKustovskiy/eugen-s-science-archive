@@ -22,7 +22,7 @@
    Contact email: ykustovskiy@gmail.com
    
    Requirements: script was succesfully used with 
-   Python 3.10, NumPy 1.24.3, RDKit 2023.9.4, MDAnalysis 2.5.0, 
+   Python 3.11, NumPy 1.24.3, RDKit 2023.9.4, MDAnalysis 2.5.0, 
 """
 
 import os
@@ -81,6 +81,7 @@ if __name__ == "__main__":
         if args.v:
             print(f"Processing file {file} ...")
         extract(file)
+
 
 
 
