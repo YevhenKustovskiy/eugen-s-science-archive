@@ -22,7 +22,7 @@
    Contact email: ykustovskiy@gmail.com
    
    Requirements: script was succesfully implemented with 
-   Python 3.10, RDKit 2023.9.4 
+   Python 3.11, RDKit 2023.9.4 
 """
 
 import argparse
@@ -49,5 +49,6 @@ if __name__ == "__main__":
     new_molecule = AllChem.AssignBondOrdersFromTemplate(template_mol, molecule)
     Chem.MolToMolFile(new_molecule, args.o)
     
+
 
 
