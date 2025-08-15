@@ -15,7 +15,7 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
    
-   A copies of GNU license, RDKit license are available at:
+   Copies of GNU license, RDKit license are available at:
    
    https://github.com/YevhenKustovskiy/md-scripts/edit/main/LICENSE   
    
@@ -49,4 +49,5 @@ if __name__ == "__main__":
     new_molecule = AllChem.AssignBondOrdersFromTemplate(template_mol, molecule)
     Chem.MolToMolFile(new_molecule, args.o)
     
+
 
