@@ -1,0 +1,52 @@
+generate protein topology and index files
+if using with CHARMM36-july2022port set n terminus for MET interactively with -ter (NH3+)
+gmx pdb2gmx -f protein.pdb -o sys.gro -p sys.top -n index.ndx -ter 
+
+convert ligand.pdb to .gro using editconf (optional, can do everything in pdb)
+gmx editconf -f ligand.pdb -o ligand.gro
+
+aligns selected atoms along principal axes (helps to pack system tightly in some cases)
+gmx editconf -f sys.gro -o sys_aligned.gro -princ
+
+create pbc box (triclinic, cubic, dodecahedron,octahedron)
+gmx editconf -f sys_aligned.gro -o sys_b.gro -bt triclinic -d 1.0 -c  
+  
+as a rule of thumb dodecahedron or octahedron give best result for globular proteins with shape close to spherical, 
+use triclinic box for elongated objects
+
+solvate the box
+gmx solvate -cp sys_b.gro -cs tip3p.gro -p sys.top -o sys_s.gro
+
+create .tpr file for adding ions using any .mdp file
+gmx grompp -f em.mdp -c sys_s.gro -p sys.top -o ions.tpr -v
+
+replace solvent with ions (set the proper amount of -+ ions in order to neutralize the system)
+gmx genion -s ions.tpr -p sys.top -o sys_i.gro -pname NA -np 50 -nname CL -nn 29
+
+create .tpr file for energy minimization and perform it 
+gmx grompp -f em.mdp -c sys_i.gro -p sys.top -o em.tpr -v
+gmx mdrun -s em.tpr -o em.trr -c sys_em.gro -e em.edr -g em.log -v
+
+create index group for ligand with no H* (optional; if you need to generate restraints manually)
+gmx make_ndx -f ligand.gro -o ligand.ndx
+
+create restraints for ligand (optional, usually you already have them in your .itp)
+gmx genrestr -f ligand.gro -n ligand.ndx -o 98res.itp -fc 1000 1000 1000
+
+merge protein and ligand index groups for coupling and add them to nvt.mdp, npt.mdp, md.mdp
+gmx make_ndx -f sys_em.gro -o index.ndx
+
+create NVT.tpr using grompp and perform NVT equilibration
+gmx grompp -f nvt.mdp -c sys_em.gro -r sys_em.gro -p sys.top -n index.ndx -o nvt.tpr
+gmx mdrun -s nvt.tpr -o sys_nvt.trr -c sys_nvt.gro -cpo sys_nvt.cpt -e sys_nvt.edr -g sys_nvt.log -v -nt 1 -pin on
+
+create NPT.tpr using grompp and perform NPT equilibration
+gmx grompp -f npt.mdp -c sys_nvt.gro -t sys_nvt.cpt -r sys_nvt.gro -p sys.top -n index.ndx -o npt.tpr
+gmx mdrun -s npt.tpr -o sys_npt.trr -c sys_npt.gro -cpo sys_npt.cpt -e sys_npt.edr -g sys_npt.log -v -nt 1 -pin on
+
+create MD.tpr using grompp and perform productive MD run (if you are running it on CPU control number of threads with -nt, can also remove -pin)
+gmx grompp -f md.mdp -c sys_npt.gro -t sys_npt.cpt -p sys.top -n index.ndx -o md.tpr
+gmx mdrun -s md.tpr -o sys_md.trr -c sys_md.pdb -cpo sys_md.cpt -e sys_md.edr -g sys_md.log -v -nt 1 -pin on -cpi sys_md.cpt
+
+If you need to extend simulation - can do it driectly through .tpr file
+gmx convert-tpr -s md.tpr -extend 25000 -o md.tpr 
