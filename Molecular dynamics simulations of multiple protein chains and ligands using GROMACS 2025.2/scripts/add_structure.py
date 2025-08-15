@@ -22,7 +22,7 @@
    Contact email: ykustovskiy@gmail.com
    
    Requirements: script was succesfully used with 
-   Python 3.10, MDAnalysis 2.5.0
+   Python 3.11, MDAnalysis 2.5.0
 """
 
 import argparse
