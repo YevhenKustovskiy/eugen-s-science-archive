@@ -15,7 +15,7 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. 
    
-   A copy of GNU license as well as MDAnalysis license is available at:
+   Copies of GNU license and MDAnalysis license are available at:
    
    https://github.com/YevhenKustovskiy/eugen-s-science-archive/blob/main/LICENSE.txt 
    
