@@ -30,7 +30,7 @@ Be careful with the variables you modify, some can have severe consequences on t
   ipb                  = 2                                              # Dielectric model for PB
   inp                  = 2                                              # Nonpolar solvation method
   sander_apbs          = 0                                              # Use sander.APBS?
-  indi                 = 20.0                                           # Internal dielectric constant
+  indi                 = 20.0                                           # Internal dielectric constant !!! THIS DEPENDS ON YOUR SYSTEM, FOR SMALL LIGAND VALUES IN RANGE 1-2 USUALLY WORK WELL. CHECK LITERATURE ON YOUR TARGET !!!
   exdi                 = 80.0                                           # External dielectric constant
   emem                 = 4.0                                            # Membrane dielectric constant
   smoothopt            = 1                                              # Set up dielectric values for finite-difference grid edges that are located across the solute/solvent dielectric boundary
