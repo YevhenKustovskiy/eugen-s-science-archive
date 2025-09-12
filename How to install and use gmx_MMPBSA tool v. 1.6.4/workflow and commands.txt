@@ -1,0 +1,43 @@
+#Create separate environment, install gmx_MMPBSA tool and its dependencies
+#This command creates separate environment and install dependencies of gmx_MMPBSA: 
+
+mamba create -n gmx_MMPBSA -c conda-forge python=3.10 ambertools pip
+
+#Or directly use conda
+
+conda create -n gmx_MMPBSA -c conda-forge python=3.10 ambertools pip
+
+#But without mamba it will be painfully slow and might fail on ambertools (large package, difficult to solve)
+#Activate your environment:
+
+conda activate gmx_MMPBSA
+
+#This one is optional, but preferable. gmx_MMPBSA analyzer uses PyQt for GUI, so if you need it, install PyQt. It is not required for MM/PBSA calculations
+
+mamba install -c conda-forge PyQt
+
+#Install gmx_MMPBSA v. 1.6.4 (latest) + Analyzer
+
+python -m pip install gmx_MMPBSA==1.6.4 
+
+#!!! MAKE SURE YOU ARE RUNNING PYTHON/PIP FROM gmx_MMPBSA ENVIRONMENT. ALL DEPENDENCIES SHOULD BE INSTALLED INTO THIS ENVIRONMENT, NOT LOCALLY AND CERTAINLY NOT MIXED !!!
+==============================================================================================================================================================================
+#Preprocess trajectory with gmx trjconv by removing everything except for your receptor and ligand atoms, also !!! REMOVE PBC !!!, center your complex and align, so there were no jumps.
+#create separate folder, move into it your preprocessed compressed (.xtc) trajectory, portable binary input file (.tpr), files with forcefield (for gmx port of CHARMM36),
+#files with topological parameters (.top/.itp), files with index groups (use gmx make_ndx) of your receptor and ligand, mmpbsa.in file with parameters for gmx_MMPBSA tool
+#example of this last file you can download from OFFICIAL REPOSITORY OF gmx_MMPBSA https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/getting-started/ or this repository
+
+#Run gmx_MMPBSA from gmx_MMPBSA environment which you MUST ACTIVATE (conda activate gmx_MMPBSA) each time you want to perform calculations:
+
+mpirun -np 4 gmx_MMPBSA -O -i mmpbsa.in -cs md.tpr -ct sys_proteins.xtc -ci index.ndx -cg 24 25 -cp sys.top -o FINAL_RESULTS_MMPBSA.dat -eo FINAL_RESULTS_MMPBSA.csv -do FINAL_DECOMP_MMPBSA.dat -deo FINAL_DECOMP_MMPBSA.csv
+
+WAIT UNTIL IT FINISHES, IT MAY TAKE LONG DEPENDING ON YOUR SYSTEM, NUMBER OF FRAMES, JOBS IN PARALLEL, etc. 
+
+Althoug gmx_MMBSA supports mpirun, you can also run it as one process (but it will be slow):
+gmx_MMPBSA -O -i mmpbsa.in -cs md.tpr -ct sys_proteins.xtc -ci index.ndx -cg 24 25 -cp sys.top -o FINAL_RESULTS_MMPBSA.dat -eo FINAL_RESULTS_MMPBSA.csv -do FINAL_DECOMP_MMPBSA.dat -deo FINAL_DECOMP_MMPBSA.csv
+
+
+
+
+  
+
