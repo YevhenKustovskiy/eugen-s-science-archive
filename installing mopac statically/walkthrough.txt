@@ -1,0 +1,19 @@
+Stage 1 Get source:
+Clone github repository (or download as an archive using wget and extract using tar -xf), create build dir and set it as working dir:
+
+git clone https://github.com/openmopac/mopac.git
+mkdir build
+cd build
+
+Stage 2 Install static libs (on Fedora):
+sudo dnf install glibc-static libgfortran-static libquadmath-static blas-static lapack-static
+
+Stage 3 Generate configuration and build:
+cmake .. -DCMAKE_BUILD_TYPE=Release -DSTATIC_BUILD=ON -DAUTO_BLAS=OFF -DMOPAC_LINK="-static -lgfortran -llapack -lblas -fopenmp"
+
+make -j$(nproc)
+
+Stage 4 Test resulting binary
+ctest --output-on-failure
+
+Stage 5 (Optional) make MOPAC available system wide by creating alias in .bashrc
